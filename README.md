@@ -23,10 +23,34 @@ When updating, check the release notes to see if there are any changes you might
 to your `app` folder. The affected files can be copied or merged from
 `vendor/codeigniter4/framework/app`.
 
-## Setup
+## Quick Start for Developers
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/beebrain/SSVT.git
+    cd SSVT
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    composer install
+    ```
+
+3.  **Environment Setup**
+    - Copy `.env.example` to `.env`
+    - Open `.env` and configure your:
+        - `app.baseURL`
+        - `database.default` (Hostname, Database, Username, Password)
+    - Ensure your web server points to the `public/` directory or run the built-in server:
+      ```bash
+      php spark serve
+      ```
+
+4.  **Database Migration (Optional)**
+    If there are migrations available, run:
+    ```bash
+    php spark migrate
+    ```
 
 ## Important Change with index.php
 
