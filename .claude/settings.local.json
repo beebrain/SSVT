@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod 755 /c/xampp/htdocs/SSVT_App/writable/uploads)",
+      "Bash(php spark:*)",
+      "Bash(find /c/xampp/htdocs/SSVT_App/app -name \"*.php\" -exec php -l {} \\\\;)",
+      "Bash(grep -v \"^$\")"
+    ]
+  }
+}
