@@ -96,7 +96,7 @@
                         <?php endif; ?>
                     </div>
                     <a href="<?= base_url('submit/' . $a['id']) ?>" class="btn btn-sm <?= $a['submitted'] ? 'btn-outline-success' : 'btn-primary' ?> flex-shrink-0">
-                        <?= $a['submitted'] ? '<i class="bi bi-pencil me-1"></i>แก้ไข' : '<i class="bi bi-upload me-1"></i>ส่งงาน' ?>
+                        <?= $a['submitted'] ? '<i class="bi bi-pencil me-1"></i>แก้ไข' : '<i class="bi bi-upload me-1"></i>ส่งผลงาน' ?>
                     </a>
                 </div>
             </div>

@@ -66,7 +66,7 @@
     <div class="text-center mb-4">
         <i class="bi bi-cloud-fill text-primary" style="font-size:3rem;"></i>
         <h4 class="fw-bold mb-1 mt-2">WordCloud</h4>
-        <p class="text-muted small">พิมพ์คำ 3 คำที่นึกถึงเกี่ยวกับการอบรมนี้</p>
+        <p class="text-muted small">พิมพ์ 3 คำที่นึกถึงเกี่ยวกับการอบรมนี้</p>
         <?php if ($total > 0): ?>
         <span class="badge bg-light text-primary border">
             <i class="bi bi-people me-1"></i><?= $total ?> คนร่วมแล้ว
@@ -120,14 +120,14 @@
         </button>
     </form>
 
-    <!-- ลิงก์ดู WordCloud และกลับหน้าผลงาน -->
+    <!-- ลิงก์ดู WordCloud และกลับไปหน้าผลงาน -->
     <div class="d-flex justify-content-between align-items-center mt-3">
         <a href="<?= base_url('wordcloud/display') ?>" target="_blank" class="text-muted small text-decoration-none">
             <i class="bi bi-tv me-1"></i>ดู WordCloud
         </a>
         <?php if (session()->get('participant_id')): ?>
         <a href="<?= base_url('my-work') ?>" class="text-muted small text-decoration-none">
-            <i class="bi bi-arrow-left me-1"></i>กลับหน้าผลงาน
+            <i class="bi bi-arrow-left me-1"></i>กลับไปหน้าผลงาน
         </a>
         <?php endif; ?>
     </div>

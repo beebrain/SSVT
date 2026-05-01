@@ -16,7 +16,7 @@
                 <?php if (empty($words)): ?>
                     <p class="text-muted text-center py-5">ยังไม่มีข้อมูล WordCloud</p>
                 <?php else: ?>
-                    <div id="wordcloudCanvas" style="width:100%;height:450px;background:#fafafa;border-radius:12px;"></div>
+                    <div id="wordcloudCanvas" style="width:100%;height:450px;background:#ffffff;border:1px solid rgba(0,0,0,0.06);border-radius:12px;"></div>
                 <?php endif; ?>
             </div>
         </div>
@@ -26,7 +26,7 @@
     <div class="col-12">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white fw-semibold">
-                <i class="bi bi-bar-chart me-2 text-primary"></i>ความถี่คำ (Top 20)
+                <i class="bi bi-bar-chart me-2 text-primary"></i>ความถี่ของคำ (Top 20)
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -59,22 +59,37 @@
 </div>
 
 <?php if (!empty($words)): ?>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
 <script>
-const wordsData = <?= json_encode(array_map(fn($w) => [$w['text'], $w['size'] * 10 + 20], $words)) ?>;
+const wordsData = <?= json_encode($words) ?>;
+const wcColors = [
+    '#4a6b52', '#5c7d64', '#6b8e7a', '#3d5c44',
+    '#4a6d8c', '#5a7a9e', '#5c6b8a', '#6b5b8c',
+    '#a85c4a', '#9a6b4a', '#8b7355', '#7d6b55',
+    '#5a5a58', '#6d6d6a', '#4a5568',
+];
 window.addEventListener('load', function() {
     const el = document.getElementById('wordcloudCanvas');
+    const maxSize = Math.max(...wordsData.map(d => d.size));
+    const minSize = Math.min(...wordsData.map(d => d.size));
+    const list = wordsData.map(w => {
+        const normalized = (w.size - minSize) / (maxSize - minSize + 1);
+        const fontSize = Math.round(14 + normalized * 48);
+        return [w.text, fontSize];
+    });
     WordCloud(el, {
-        list: wordsData,
-        gridSize: 12,
-        weightFactor: 3,
-        fontFamily: 'Sarabun, sans-serif',
-        color: function() {
-            const colors = ['#1565C0','#2E7D32','#F57F17','#6A1B9A','#00838F','#C62828','#00695C'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        },
-        rotateRatio: 0.3,
-        backgroundColor: '#fafafa',
+        list: list,
+        gridSize: 8,
+        weightFactor: 1,
+        fontFamily: 'Inter, Sarabun, system-ui, sans-serif',
+        fontWeight: (word, weight, fontSize) => (fontSize >= 40 ? '600' : '500'),
+        color: () => wcColors[Math.floor(Math.random() * wcColors.length)],
+        rotateRatio: 0,
+        minRotation: 0,
+        maxRotation: 0,
+        ellipticity: 0.82,
+        backgroundColor: '#ffffff',
     });
 });
 </script>

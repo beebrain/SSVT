@@ -22,7 +22,7 @@
             <div class="card-body text-center">
                 <div class="display-6 text-warning mb-1"><i class="bi bi-upload"></i></div>
                 <div class="h2 fw-bold mb-0"><?= $totalSubmissions ?></div>
-                <div class="text-muted small">การส่งงาน</div>
+                <div class="text-muted small">การส่งผลงาน</div>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body">
                 <h6 class="fw-semibold mb-3"><i class="bi bi-link-45deg me-2 text-primary"></i>ลิงก์สำหรับผู้เข้าอบรม</h6>
-                <p class="text-muted small">แชร์ลิงก์นี้ให้ผู้เข้าอบรมเพื่อเข้าส่งผลงาน</p>
+                <p class="text-muted small">แชร์ลิงก์นี้ให้ผู้เข้าอบรมเพื่อส่งผลงาน</p>
                 <div class="input-group">
                     <input type="text" class="form-control form-control-sm" id="loginLink" value="<?= base_url('login') ?>" readonly>
                     <button class="btn btn-outline-primary btn-sm" onclick="copyLink()">
@@ -79,7 +79,7 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body">
                 <h6 class="fw-semibold mb-3"><i class="bi bi-cloud me-2 text-info"></i>ลิงก์ WordCloud</h6>
-                <p class="text-muted small">ลิงก์สำหรับผู้เข้าร่วมพิมพ์คำ WordCloud</p>
+                <p class="text-muted small">ลิงก์สำหรับผู้เข้าร่วมพิมพ์คำใน WordCloud</p>
                 <div class="input-group">
                     <input type="text" class="form-control form-control-sm" id="wcLink" value="<?= base_url('wordcloud') ?>" readonly>
                     <button class="btn btn-outline-info btn-sm" onclick="copyWcLink()">

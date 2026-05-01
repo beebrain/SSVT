@@ -6,7 +6,7 @@
 
 <div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-white fw-semibold">
-        <i class="bi bi-info-circle me-2 text-primary"></i>ข้อมูลการส่งงาน
+        <i class="bi bi-info-circle me-2 text-primary"></i>ข้อมูลการส่งผลงาน
     </div>
     <div class="card-body">
         <div class="row g-2">
@@ -20,7 +20,7 @@
                 <span class="text-muted">วันที่ส่ง:</span> <?= $submission['submitted_at'] ?>
             </div>
             <div class="col-sm-6">
-                <span class="text-muted">อัพเดทล่าสุด:</span> <?= $submission['updated_at'] ?>
+                <span class="text-muted">อัปเดตล่าสุด:</span> <?= $submission['updated_at'] ?>
             </div>
             <?php if (!empty($submission['note'])): ?>
             <div class="col-12">

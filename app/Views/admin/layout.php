@@ -49,7 +49,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link <?= str_contains(uri_string(), 'admin/submissions') ? 'active' : '' ?>" href="<?= base_url('admin/submissions') ?>">
-                    <i class="bi bi-grid-3x3-gap-fill me-2"></i>ภาพรวมการส่งงาน
+                    <i class="bi bi-grid-3x3-gap-fill me-2"></i>ภาพรวมการส่งผลงาน
                 </a>
             </li>
             <li class="nav-item">
@@ -118,7 +118,7 @@
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/dashboard') ?>"><i class="bi bi-speedometer2 me-2"></i>แดชบอร์ด</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/participants') ?>"><i class="bi bi-people-fill me-2"></i>ผู้เข้าอบรม</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/assignments') ?>"><i class="bi bi-journal-text me-2"></i>ผลงาน</a></li>
-            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/submissions') ?>"><i class="bi bi-grid-3x3-gap-fill me-2"></i>ภาพรวมการส่งงาน</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/submissions') ?>"><i class="bi bi-grid-3x3-gap-fill me-2"></i>ภาพรวมการส่งผลงาน</a></li>
             <li class="nav-item"><a class="nav-link" href="<?= base_url('admin/wordcloud') ?>"><i class="bi bi-cloud-fill me-2"></i>WordCloud</a></li>
         </ul>
     </div>

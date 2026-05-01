@@ -110,7 +110,7 @@
     <div class="card border-0 shadow-sm" style="border-radius:16px;">
         <div class="card-header bg-white fw-semibold border-0 pb-0">
             <i class="bi bi-cloud-upload me-2 text-primary"></i>
-            <?= $submission ? 'เพิ่มไฟล์เพิ่มเติม' : 'อัพโหลดผลงาน' ?>
+            <?= $submission ? 'เพิ่มไฟล์เพิ่มเติม' : 'อัปโหลดผลงาน' ?>
         </div>
         <div class="card-body">
             <?php if (!empty($assignment['description'])): ?>
@@ -126,7 +126,8 @@
                 <div class="upload-zone mb-3" id="uploadZone" onclick="document.getElementById('fileInput').click()">
                     <i class="bi bi-image text-primary" style="font-size:2.5rem;"></i>
                     <div class="fw-semibold mt-2">แตะเพื่อเลือกรูปภาพ</div>
-                    <div class="text-muted small">รองรับ JPG, PNG, GIF, WEBP, HEIC (สูงสุด 10MB/ไฟล์)</div>
+                    <div class="text-muted small">เลือกได้หลายไฟล์พร้อมกัน (กด Ctrl หรือ Shift ขณะเลือกในกล่องโต้ตอบ)</div>
+                    <div class="text-muted small">รองรับ JPG, PNG, GIF, WEBP, HEIC — สูงสุด 10MB ต่อไฟล์</div>
                     <input type="file" id="fileInput" name="images[]" multiple accept="image/*" onchange="previewFiles(this)">
                 </div>
 
@@ -157,11 +158,24 @@ zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
 zone.addEventListener('drop', e => {
     e.preventDefault();
     zone.classList.remove('dragover');
+    const input = document.getElementById('fileInput');
     const dt = new DataTransfer();
-    [...e.dataTransfer.files].forEach(f => dt.items.add(f));
-    document.getElementById('fileInput').files = dt.files;
-    previewFiles(document.getElementById('fileInput'));
+    [...input.files, ...e.dataTransfer.files].forEach(f => {
+        if (f.type.startsWith('image/')) dt.items.add(f);
+    });
+    input.files = dt.files;
+    previewFiles(input);
 });
+
+function removeFileFromInput(index) {
+    const input = document.getElementById('fileInput');
+    const dt = new DataTransfer();
+    [...input.files].forEach((file, i) => {
+        if (i !== index) dt.items.add(file);
+    });
+    input.files = dt.files;
+    previewFiles(input);
+}
 
 function previewFiles(input) {
     const grid = document.getElementById('previewGrid');
@@ -180,7 +194,7 @@ function previewFiles(input) {
         btn.className = 'remove-btn';
         btn.innerHTML = '<i class="bi bi-x"></i>';
         btn.type = 'button';
-        btn.onclick = () => { removeFile(i); div.remove(); };
+        btn.onclick = () => removeFileFromInput(i);
         div.appendChild(btn);
         grid.appendChild(div);
     });
@@ -190,7 +204,7 @@ function previewFiles(input) {
 document.getElementById('uploadForm').addEventListener('submit', function() {
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>กำลังอัพโหลด...';
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>กำลังอัปโหลด...';
 });
 </script>
 </body>

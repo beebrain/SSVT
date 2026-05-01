@@ -62,7 +62,7 @@
                         <th>#</th>
                         <th>ชื่อ-นามสกุล</th>
                         <th>รหัส</th>
-                        <th class="text-center">ส่งงาน</th>
+                        <th class="text-center">ส่งผลงาน</th>
                         <th class="text-center">จัดการ</th>
                     </tr>
                 </thead>

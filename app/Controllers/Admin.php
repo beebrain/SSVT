@@ -116,7 +116,7 @@ class Admin extends BaseController
         }
 
         $this->participantModel->insert(['name' => $name, 'participant_code' => $code]);
-        return redirect()->to(base_url('admin/participants'))->with('success', 'เพิ่มผู้เข้าอบรมเรียบร้อย');
+        return redirect()->to(base_url('admin/participants'))->with('success', 'เพิ่มผู้เข้าอบรมเรียบร้อยแล้ว');
     }
 
     public function editParticipant(int $id)
@@ -135,13 +135,13 @@ class Admin extends BaseController
         }
 
         $this->participantModel->update($id, ['name' => $name, 'participant_code' => $code]);
-        return redirect()->to(base_url('admin/participants'))->with('success', 'แก้ไขข้อมูลเรียบร้อย');
+        return redirect()->to(base_url('admin/participants'))->with('success', 'แก้ไขข้อมูลเรียบร้อยแล้ว');
     }
 
     public function deleteParticipant(int $id)
     {
         $this->participantModel->delete($id);
-        return redirect()->to(base_url('admin/participants'))->with('success', 'ลบผู้เข้าอบรมเรียบร้อย');
+        return redirect()->to(base_url('admin/participants'))->with('success', 'ลบผู้เข้าอบรมเรียบร้อยแล้ว');
     }
 
     public function importParticipants()
@@ -225,7 +225,7 @@ class Admin extends BaseController
             'assignment_order' => (int)$this->request->getPost('assignment_order'),
             'is_active'        => 1,
         ]);
-        return redirect()->to(base_url('admin/assignments'))->with('success', 'เพิ่มผลงานเรียบร้อย');
+        return redirect()->to(base_url('admin/assignments'))->with('success', 'เพิ่มผลงานเรียบร้อยแล้ว');
     }
 
     public function editAssignment(int $id)
@@ -236,13 +236,13 @@ class Admin extends BaseController
             'assignment_order' => (int)$this->request->getPost('assignment_order'),
             'is_active'        => (int)$this->request->getPost('is_active'),
         ]);
-        return redirect()->to(base_url('admin/assignments'))->with('success', 'แก้ไขผลงานเรียบร้อย');
+        return redirect()->to(base_url('admin/assignments'))->with('success', 'แก้ไขผลงานเรียบร้อยแล้ว');
     }
 
     public function deleteAssignment(int $id)
     {
         $this->assignmentModel->delete($id);
-        return redirect()->to(base_url('admin/assignments'))->with('success', 'ลบผลงานเรียบร้อย');
+        return redirect()->to(base_url('admin/assignments'))->with('success', 'ลบผลงานเรียบร้อยแล้ว');
     }
 
     // ======================== SUBMISSIONS ========================
@@ -261,7 +261,7 @@ class Admin extends BaseController
     {
         $submission = $this->submissionModel->getWithFiles($submissionId);
         if (!$submission) {
-            return redirect()->to(base_url('admin/submissions'))->with('error', 'ไม่พบข้อมูลการส่งงาน');
+            return redirect()->to(base_url('admin/submissions'))->with('error', 'ไม่พบข้อมูลการส่งผลงาน');
         }
         $data = [
             'title'      => 'ไฟล์ที่ส่ง',
@@ -278,7 +278,7 @@ class Admin extends BaseController
             if (file_exists($path)) unlink($path);
             $this->fileModel->delete($fileId);
         }
-        return redirect()->back()->with('success', 'ลบไฟล์เรียบร้อย');
+        return redirect()->back()->with('success', 'ลบไฟล์เรียบร้อยแล้ว');
     }
 
     // ======================== WORDCLOUD ========================
@@ -297,6 +297,6 @@ class Admin extends BaseController
     {
         $db = \Config\Database::connect();
         $db->table('wordcloud_entries')->truncate();
-        return redirect()->to(base_url('admin/wordcloud'))->with('success', 'ล้างข้อมูล WordCloud เรียบร้อย');
+        return redirect()->to(base_url('admin/wordcloud'))->with('success', 'ล้างข้อมูล WordCloud เรียบร้อยแล้ว');
     }
 }

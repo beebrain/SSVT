@@ -43,7 +43,7 @@ class WordCloud extends BaseController
             'word3' => $word3,
         ]);
 
-        return redirect()->to(base_url('wordcloud'))->with('success', 'บันทึกคำเรียบร้อย! คำของคุณถูกเพิ่มใน WordCloud แล้ว');
+        return redirect()->to(base_url('wordcloud'))->with('success', 'บันทึกคำเรียบร้อยแล้ว คำของคุณถูกเพิ่มลงใน WordCloud');
     }
 
     public function display()

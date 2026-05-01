@@ -148,35 +148,41 @@ class SubmitWork extends BaseController
         $uploadPath = WRITEPATH . 'uploads/';
         if (!is_dir($uploadPath)) mkdir($uploadPath, 0755, true);
 
-        $uploadedFiles = $this->request->getFiles();
-        $uploadErrors  = [];
+        // Use getFileMultiple so `name="images[]"` always yields an array (single upload via getFiles() can be one object, not iterable as files).
+        $imageFiles   = $this->request->getFileMultiple('images');
+        $uploadErrors = [];
 
-        if (!empty($uploadedFiles['images'])) {
-            foreach ($uploadedFiles['images'] as $file) {
+        if (!empty($imageFiles)) {
+            foreach ($imageFiles as $file) {
                 if (!$file->isValid() || $file->hasMoved()) continue;
                 if ($file->getError() === UPLOAD_ERR_NO_FILE) continue;
 
+                // MIME/size must be read before move(); temp file is gone after move() and getMimeType() uses finfo on that path.
+                $mimeType = $file->getMimeType();
+                $byteSize = $file->getSize();
+
                 $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/heic', 'image/heif'];
-                if (!in_array($file->getMimeType(), $allowed)) {
+                if (!in_array($mimeType, $allowed)) {
                     $uploadErrors[] = $file->getName() . ': ประเภทไฟล์ไม่รองรับ';
                     continue;
                 }
 
-                if ($file->getSize() > 10 * 1024 * 1024) {
+                if ($byteSize > 10 * 1024 * 1024) {
                     $uploadErrors[] = $file->getName() . ': ไฟล์ใหญ่เกิน 10MB';
                     continue;
                 }
 
                 $newName = $file->getRandomName();
+                $originalName = $file->getClientName();
                 $file->move($uploadPath, $newName);
 
                 $this->fileModel->insert([
                     'submission_id' => $submissionId,
-                    'original_name' => $file->getClientName(),
+                    'original_name' => $originalName,
                     'stored_name'   => $newName,
                     'file_path'     => 'uploads/' . $newName,
-                    'file_size'     => $file->getSize(),
-                    'mime_type'     => $file->getMimeType(),
+                    'file_size'     => $byteSize,
+                    'mime_type'     => $mimeType,
                 ]);
             }
         }
@@ -206,6 +212,6 @@ class SubmitWork extends BaseController
             }
         }
 
-        return redirect()->to(base_url('submit/' . $assignmentId))->with('success', 'ลบไฟล์เรียบร้อย');
+        return redirect()->to(base_url('submit/' . $assignmentId))->with('success', 'ลบไฟล์เรียบร้อยแล้ว');
     }
 }

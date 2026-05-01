@@ -63,8 +63,8 @@
     <div class="brand-icon">
         <i class="bi bi-mortarboard-fill text-white" style="font-size:2rem;"></i>
     </div>
-    <h4 class="text-center fw-bold mb-1">ส่งผลงานการอบรม</h4>
-    <p class="text-center text-muted small mb-4">กรอกรหัสผู้เข้าอบรมเพื่อเข้าสู่ระบบ</p>
+    <h4 class="text-center fw-bold mb-1">ผลงานการอบรม</h4>
+    <p class="text-center text-muted small mb-4">กรอกรหัสผู้เข้าอบรม เพื่อเข้าสู่ระบบ</p>
 
     <?php if (!empty($error)): ?>
     <div class="alert alert-danger text-center py-2">
